@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/anuraggr/myu/tui"
+	"github.com/anuraggr/myu/youtube"
 )
 
 func main() {
@@ -36,7 +39,7 @@ func main() {
 		count = 10
 	}
 
-	results, err := FetchSearchResults(query, count)
+	results, err := youtube.FetchSearchResults(query, count)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error:", err)
 		os.Exit(1)
@@ -48,7 +51,7 @@ func main() {
 
 	choice := 0
 	if *searchMode {
-		choice, err = pickResult(results, query)
+		choice, err = tui.PickResult(results, query)
 		if err != nil {
 			os.Exit(0)
 		}
